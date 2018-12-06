@@ -1,11 +1,4 @@
-import {
-  IFilm,
-  ISpecies,
-  IPerson,
-  ICharacter,
-  IPlanet,
-  IEntity,
-} from './types';
+import { IFilm, IPerson, IPlanet, IEntity } from './types';
 import mapEntity, {
   IMapEntityOptions,
   extractIdFromEntityUrl,

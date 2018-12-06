@@ -50,10 +50,13 @@ class App extends Component<{}, IAppState> {
         {this.state.isInitializing ? (
           this.renderLoader()
         ) : (
-          <FilmList
-            films={this.state.films}
-            onFilmClick={this.handleSelectFilm}
-          />
+          <div>
+            <h3>Star Wars Films</h3>
+            <FilmList
+              films={this.state.films}
+              onFilmClick={this.handleSelectFilm}
+            />
+          </div>
         )}
         <FilmDetailsModal
           isOpen={this.state.selectedFilmId !== undefined}

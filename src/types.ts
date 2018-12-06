@@ -37,11 +37,13 @@ export interface ISpecies extends ICharacter {
   eyeColors: string[];
 }
 
+export type Gender = 'male' | 'female' | 'n/a' | 'unknown';
+
 export interface IPerson extends ICharacter {
   starships?: IStarship[];
   vehicles?: IVehicle[];
   birthYear: string;
-  gender?: string;
+  gender?: Gender;
   eyeColor: string;
   species: ISpecies[];
   mass: number;

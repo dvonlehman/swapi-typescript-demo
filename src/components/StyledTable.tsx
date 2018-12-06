@@ -14,11 +14,16 @@ export default styled.table`
   & thead {
     background-color: darkgray;
     color: #000;
+    font-weight: bold;
   }
   & tr:nth-of-type(even) {
     background-color: lightgray;
   }
   tr {
     cursor: pointer;
+  }
+  tr:hover {
+    color: white;
+    background-color: #000;
   }
 `;
