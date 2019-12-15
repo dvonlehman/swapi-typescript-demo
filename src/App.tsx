@@ -15,29 +15,36 @@ interface IAppState {
 }
 
 const App = () => {
-  let myAppState: IAppState = {isInitializing: true}
-  const [myState, setMyState] = useState(myAppState)
+  let myAppState: IAppState = { isInitializing: true };
+  const [myState, setMyState] = useState(myAppState);
 
-  const renderLoader = () => <h1>Loading...</h1>
+  const renderLoader = () => <h1>Loading...</h1>;
 
   useEffect(() => {
     const getFiles = async () => {
       const films = await swapi.listAllFilms();
-      setMyState({isInitializing: false, films: films})
-    }
-  
-    getFiles()
-  }, [])
+      setMyState({ isInitializing: false, films: films });
+    };
+
+    getFiles();
+  }, []);
 
   const handleSelectFilm = (film: IFilm) => {
-
     swapi.getFilm(film.id, ['characters']).then(fullFilmDetails => {
-      setMyState({...myState, selectedFilmId: film.id, selectedFilm: fullFilmDetails})
+      setMyState({
+        ...myState,
+        selectedFilmId: film.id,
+        selectedFilm: fullFilmDetails,
+      });
     });
   };
 
   const handleCloseFilmModal = () => {
-    setMyState({...myState, selectedFilmId: undefined, selectedFilm: undefined})
+    setMyState({
+      ...myState,
+      selectedFilmId: undefined,
+      selectedFilm: undefined,
+    });
   };
 
   return (
@@ -47,19 +54,16 @@ const App = () => {
       ) : (
         <div>
           <h3>Star Wars Films</h3>
-          <FilmList
-              films={myState.films}
-              onFilmClick={handleSelectFilm}
-            />
+          <FilmList films={myState.films} onFilmClick={handleSelectFilm} />
         </div>
-      )} 
+      )}
       <FilmDetailsModal
-          isOpen={myState.selectedFilmId !== undefined}
-          film={myState.selectedFilm}
-          onRequestClose={(handleCloseFilmModal)}
-        />  
+        isOpen={myState.selectedFilmId !== undefined}
+        film={myState.selectedFilm}
+        onRequestClose={handleCloseFilmModal}
+      />
     </>
   );
-}
+};
 
 export default App;
