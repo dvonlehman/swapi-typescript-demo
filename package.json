@@ -10,7 +10,7 @@
     "react-dom": "^16.12.0",
     "react-modal": "^3.11.1",
     "react-scripts": "^3.3.0",
-    "typescript": "3.2.1"
+    "typescript": "^3.7.3"
   },
   "scripts": {
     "start": "PORT=5500 react-scripts start",
@@ -28,18 +28,18 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/camelcase": "^4.1.0",
-    "@types/camelcase-keys": "^4.0.0",
     "@emotion/core": "^10.0.2",
     "@emotion/styled": "^10.0.4",
+    "@types/camelcase": "^4.1.0",
+    "@types/camelcase-keys": "^4.0.0",
     "@types/jest": "23.3.10",
-    "@types/node": "10.12.12",
-    "@types/react": "16.7.13",
-    "@types/react-dom": "16.0.11",
-    "@types/react-modal": "^3.6.0",
-    "prettier": "^1.15.3",
-    "tslint": "^5.11.0",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.17.0"
+    "@types/node": "^12.12.17",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-modal": "^3.10.1",
+    "prettier": "^1.19.1",
+    "tslint": "^5.20.1",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-config-prettier": "^1.18.0"
   }
 }
