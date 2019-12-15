@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import SwApi from './swapi';
 import { IFilm } from './types';
@@ -14,58 +14,52 @@ interface IAppState {
   selectedFilm?: IFilm;
 }
 
-class App extends Component<{}, IAppState> {
-  state: Readonly<IAppState> = {
-    isInitializing: true,
-  };
+const App = () => {
+  let myAppState: IAppState = {isInitializing: true}
+  const [myState, setMyState] = useState(myAppState)
 
-  async componentDidMount() {
-    const films = await swapi.listAllFilms();
+  const renderLoader = () => <h1>Loading...</h1>
 
-    this.setState({
-      isInitializing: false,
-      films,
-    });
-  }
+  useEffect(() => {
+    const getFiles = async () => {
+      const films = await swapi.listAllFilms();
+      setMyState({...myState, isInitializing: false, films: films})
+    }
+  
+    getFiles()
+  }, [])
 
-  handleSelectFilm = (film: IFilm) => {
-    this.setState({ selectedFilmId: film.id });
+  const handleSelectFilm = (film: IFilm) => {
 
     swapi.getFilm(film.id, ['characters']).then(fullFilmDetails => {
-      this.setState({ selectedFilm: fullFilmDetails });
+      setMyState({...myState, selectedFilmId: film.id, selectedFilm: fullFilmDetails})
     });
   };
 
-  handleCloseFilmModal = () => {
-    this.setState({ selectedFilmId: undefined, selectedFilm: undefined });
+  const handleCloseFilmModal = () => {
+    setMyState({...myState, selectedFilmId: undefined, selectedFilm: undefined})
   };
 
-  renderLoader() {
-    return <h1>Loading...</h1>;
-  }
-
-  render() {
-    return (
-      <div className="App">
-        {this.state.isInitializing ? (
-          this.renderLoader()
-        ) : (
-          <div>
-            <h3>Star Wars Films</h3>
-            <FilmList
-              films={this.state.films}
-              onFilmClick={this.handleSelectFilm}
+  return (
+    <>
+      {myState.isInitializing ? (
+        renderLoader()
+      ) : (
+        <div>
+          <h3>Star Wars Films</h3>
+          <FilmList
+              films={myState.films}
+              onFilmClick={handleSelectFilm}
             />
-          </div>
-        )}
-        <FilmDetailsModal
-          isOpen={this.state.selectedFilmId !== undefined}
-          film={this.state.selectedFilm}
-          onRequestClose={this.handleCloseFilmModal}
-        />
-      </div>
-    );
-  }
+        </div>
+      )} 
+      <FilmDetailsModal
+          isOpen={myState.selectedFilmId !== undefined}
+          film={myState.selectedFilm}
+          onRequestClose={(handleCloseFilmModal)}
+        />  
+    </>
+  );
 }
 
 export default App;
