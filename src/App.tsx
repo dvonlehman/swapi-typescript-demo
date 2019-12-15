@@ -23,7 +23,7 @@ const App = () => {
   useEffect(() => {
     const getFiles = async () => {
       const films = await swapi.listAllFilms();
-      setMyState({...myState, isInitializing: false, films: films})
+      setMyState({isInitializing: false, films: films})
     }
   
     getFiles()
