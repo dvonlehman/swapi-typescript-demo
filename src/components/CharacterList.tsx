@@ -1,5 +1,5 @@
 import React, { SFC } from 'react';
-import { IFilm, IPerson } from '../types';
+import { IPerson } from '../types';
 import StyledTable from './StyledTable';
 
 export interface ICharacterListProps {
